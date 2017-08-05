@@ -21,7 +21,6 @@ def ModelLearning(X, y):
     
     # Create 10 cross-validation sets for training and testing
     cv = ShuffleSplit(n_splits = 10, test_size = 0.2, random_state = 0)
-    cv = cv.get_n_splits(X.shape[0])
 
     # Generate the training set sizes increasing by 50
     train_sizes = np.rint(np.linspace(1, X.shape[0]*0.8 - 1, 9)).astype(int)
@@ -36,8 +35,7 @@ def ModelLearning(X, y):
         regressor = DecisionTreeRegressor(max_depth = depth)
 
         # Calculate the training and testing scores
-        sizes, train_scores, test_scores = curves.learning_curve(regressor, X, y, \
-            cv = cv, train_sizes = train_sizes, scoring = 'r2')
+        sizes, train_scores, test_scores = curves.learning_curve(regressor, X, y, cv = cv, train_sizes = train_sizes, scoring = 'r2')
         
         # Find the mean and standard deviation for smoothing
         train_std = np.std(train_scores, axis = 1)
@@ -74,14 +72,12 @@ def ModelComplexity(X, y):
     
     # Create 10 cross-validation sets for training and testing
     cv = ShuffleSplit(n_splits = 10, test_size = 0.2, random_state = 0)
-    cv = cv.get_n_splits(X.shape[0])
 
     # Vary the max_depth parameter from 1 to 10
     max_depth = np.arange(1,11)
 
     # Calculate the training and testing scores
-    train_scores, test_scores = curves.validation_curve(DecisionTreeRegressor(), X, y, \
-        param_name = "max_depth", param_range = max_depth, cv = cv, scoring = 'r2')
+    train_scores, test_scores = curves.validation_curve(DecisionTreeRegressor(), X, y, param_name = "max_depth", param_range = max_depth, cv = cv, scoring = 'r2')
 
     # Find the mean and standard deviation for smoothing
     train_mean = np.mean(train_scores, axis=1)
