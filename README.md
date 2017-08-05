@@ -1,5 +1,6 @@
 # Predicting Boston Housing Prices
 
+![](https://assets3.thrillist.com/v1/image/2442752/size/tmg-facebook_social.jpg)
 This project has been developed as part of the Machine Learning Engineer Nanodegree offered by Udacity. The focus is to gain insight about several model evaluation and validation techniques.
 
 ### Install
